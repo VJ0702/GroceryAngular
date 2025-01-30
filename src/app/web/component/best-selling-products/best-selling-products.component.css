@@ -1,0 +1,21 @@
+.rating svg {
+    margin-right: 2px;
+}
+
+.text-warning {
+    fill: #ffc107;
+    /* Golden color for filled and half-filled stars */
+    stroke: #ffc107;
+    /* Same color for the outer stroke */
+}
+
+/* .text-muted {
+    fill: none;
+    stroke: #ffc107;
+    stroke-width: 1px;
+} */
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-warning-rgb), var(--bs-text-opacity)) !important;
+}

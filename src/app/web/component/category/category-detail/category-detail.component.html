@@ -1,0 +1,83 @@
+<!-- <div class="category-details-page">
+    <div *ngIf="loading; else contentLoaded" class="loading">
+        <p>Loading category details...</p>
+    </div>
+
+    <ng-template #contentLoaded>
+        <div *ngIf="categoryDetails; else errorContent">
+            <div class="category-header">
+                <h1>{{ categoryDetails.name }}</h1>
+            </div>
+            <div class="category-content">
+                <img [src]="categoryDetails.imageUrl" alt="{{ categoryDetails.name }}" class="category-image" />
+                <p class="category-description">
+                    {{ categoryDetails.name || 'No description available.' }}
+                </p>
+            </div>
+
+            <div class="back-button">
+                <a routerLink="/categories" class="btn">← Back to Categories</a>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #errorContent>
+        <div class="error-message">
+            <p>{{ errorMessage || 'No category details available.' }}</p>
+        </div>
+    </ng-template>
+</div> -->
+
+
+<div class="container mt-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ categoryDetails?.name }}</li>
+        </ol>
+    </nav>
+
+    <!-- Category Banner -->
+    <div class="category-banner text-center">
+        <img [src]="categoryDetails?.imageUrl" class="img-fluid rounded mb-3" alt="{{ categoryDetails?.name }}" />
+        <h1 class="display-5">{{ categoryDetails?.name }}</h1>
+        <p class="text-muted">{{ categoryDetails?.description }}</p>
+    </div>
+
+    <!-- Subcategories Section -->
+    <div *ngIf="categoryDetails?.subCategories?.length" class="subcategories mt-5">
+        <h2 class="mb-4">Explore Subcategories</h2>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let subCategory of categoryDetails.subCategories">
+                <div class="card">
+                    <img [src]="subCategory.imageUrl || 'https://via.placeholder.com/150'" class="card-img-top"
+                        alt="{{ subCategory.name }}" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ subCategory.name }}</h5>
+                        <a [routerLink]="'/product-category/' + subCategory.urlHandle" class="btn btn-primary">View
+                            More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products mt-5">
+        <h2 class="mb-4">Products</h2>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let product of products">
+                <div class="card">
+                    <img [src]="product.imageUrl || 'https://via.placeholder.com/150'" class="card-img-top"
+                        alt="{{ product.name }}" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.price | currency }}</p>
+                        <a [routerLink]="'/product/' + product.urlHandle" class="btn btn-success">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
