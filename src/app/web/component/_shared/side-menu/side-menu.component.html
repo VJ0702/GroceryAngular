@@ -1,0 +1,58 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+    <div class="offcanvas-header justify-content-between">
+        <h4 class="fw-normal text-uppercase fs-6">Menu</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+            <ng-container *ngFor="let category of categories">
+                <li class="nav-item border-dashed">
+                    <a *ngIf="!category.subCategories.length" [routerLink]="['/product-category', category.urlHandle]"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <img [src]="category.imageUrl" alt="" width="24" height="24" />
+                        <span>{{ category.name }}</span>
+                    </a>
+
+                    <button *ngIf="category.subCategories.length"
+                        class="btn btn-toggle dropdown-toggle position-relative w-100 d-flex justify-content-between align-items-center text-dark p-2"
+                        data-bs-toggle="collapse" [attr.data-bs-target]="'#category-collapse-' + category.id"
+                        aria-expanded="false">
+                        <div class="d-flex gap-3">
+                            <img [src]="category.imageUrl" alt="" width="24" height="24" />
+                            <span>{{ category.name }}</span>
+                        </div>
+                    </button>
+
+                    <div class="collapse" [id]="'category-collapse-' + category.id">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal ps-5 pb-1">
+                            <ng-container *ngFor="let subCategory of category.subCategories">
+                                <li *ngIf="!subCategory.subCategories.length">
+                                    <a [routerLink]="['/product-category', subCategory.urlHandle]"
+                                        class="dropdown-item">{{
+                                        subCategory.name }}</a>
+                                </li>
+                                <li *ngIf="subCategory.subCategories.length">
+                                    <button
+                                        class="btn btn-toggle dropdown-toggle w-100 d-flex justify-content-between align-items-center text-dark p-2"
+                                        data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#subcategory-collapse-' + subCategory.id"
+                                        aria-expanded="false">
+                                        <span>{{ subCategory.name }}</span>
+                                    </button>
+                                    <div class="collapse" [id]="'subcategory-collapse-' + subCategory.id">
+                                        <ul class="btn-toggle-nav list-unstyled fw-normal ps-5 pb-1">
+                                            <ng-container *ngFor="let nestedSubCategory of subCategory.subCategories">
+                                                <li><a [routerLink]="['/product-category', nestedSubCategory.urlHandle]"
+                                                        class="dropdown-item">{{ nestedSubCategory.name }}</a></li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
