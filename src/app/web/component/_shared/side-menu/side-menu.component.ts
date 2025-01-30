@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CategoryService } from '../../../../features/category/services/category.service';
+import { CategoryService } from '../../../../services/category.service';
 
 @Component({
   selector: 'app-side-menu',

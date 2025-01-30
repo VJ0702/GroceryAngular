@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CategoryService } from '../../../../features/category/services/category.service';
+import { CategoryService } from '../../../../services/category.service';
 import { CommonModule } from '@angular/common';
 // import { ApiService } from '../../../../features/category/services/api.service';
 

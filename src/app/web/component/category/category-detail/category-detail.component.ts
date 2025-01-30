@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CategoryService } from '../../../../features/category/services/category.service';
+import { CategoryService } from '../../../../services/category.service';
 import { CommonModule } from '@angular/common';
-import { CategorySearchRequest } from '../../../../features/category/models/category-model/category-search-request.model';
+import { CategorySearchRequest } from '../../../../models/category-model/category-search-request.model';
 
 @Component({
   selector: 'app-category-detail',

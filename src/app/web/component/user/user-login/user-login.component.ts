@@ -3,8 +3,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserLogInRequestModel } from '../../../../features/category/models/auth/user-log-in-request-model';
-import { UserAuthService } from '../../../../features/category/services/user-auth.service';
+import { UserLogInRequestModel } from '../../../../models/auth/user-log-in-request-model';
+import { UserAuthService } from '../../../../services/user-auth.service';
 
 @Component({
   selector: 'app-user-login',

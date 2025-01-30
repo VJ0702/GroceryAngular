@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AddCategoryRequest } from '../models/add-category-request.model';
+import { AddCategoryRequest } from '../models/category-model/add-category-request.model';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { CategorySearchRequest } from '../models/category-model/category-search-request.model';

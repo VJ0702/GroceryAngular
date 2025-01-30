@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductService } from '../../../features/category/services/product.service';
-import { ApiService } from '../../../features/category/services/api.service';
+import { ProductService } from '../../../services/product.service';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-best-selling-products',
