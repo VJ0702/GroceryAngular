@@ -1,0 +1,27 @@
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.alert.success {
+    background-color: #28a745;
+    /* Green */
+}
+
+.alert.danger {
+    background-color: #dc3545;
+    /* Red */
+}
+
+.alert.warning {
+    background-color: #ffc107;
+    /* Yellow */
+    color: black;
+}

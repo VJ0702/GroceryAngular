@@ -2,6 +2,9 @@
   "routes": [
     "/",
     "/admin/categories",
-    "/admin/categories/add"
+    "/admin/categories/add",
+    "/forgot-password",
+    "/login",
+    "/register"
   ]
 }

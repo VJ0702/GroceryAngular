@@ -8,12 +8,13 @@ import { HomeIndexComponent } from './web/component/_home/home-index/home-index.
 import { ExternalFooterComponent } from './web/component/_shared/external-footer/external-footer.component';
 import { DOCUMENT } from '@angular/common';
 import { ExternalHeaderComponent } from './web/component/_shared/external-header/external-header.component';
+import { AlertComponent } from './web/component/_shared/alert/alert.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, CategoryListComponent, FormsModule, HomeIndexComponent,
-    ExternalFooterComponent, ExternalHeaderComponent],
+    ExternalFooterComponent, ExternalHeaderComponent, AlertComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserLogInRequestModel } from '../../../../models/auth/user-log-in-request-model';
 import { UserAuthService } from '../../../../services/user-auth.service';
+import { AlertService } from '../../../../services/common-services/alert.service';
 
 @Component({
   selector: 'app-user-login',
@@ -20,7 +21,7 @@ export class UserLoginComponent implements OnDestroy {
     rememberMe: false
   };
   userLoginModel: UserLogInRequestModel;
-  constructor(private authService: UserAuthService) {
+  constructor(private authService: UserAuthService, private alertService: AlertService) {
     this.userLoginModel = {
       username: '',
       password: ''
@@ -38,14 +39,19 @@ export class UserLoginComponent implements OnDestroy {
 
     this.authService.userLogin(this.userLoginModel).subscribe(
       (data) => {
+        //this.alertService.showMessage('Login Successful 🎉');
+        this.alertService.showMessage('Login Successful 🎉', 'success');
         console.log(data);
         this.authResponse = data; // Bind fetched details
         this.loading = false;
       },
       (error) => {
         this.errorMessage = 'Failed to login.';
-        console.error(error);
+        //console.error(error);
+        //console.error(error.error.message);
         this.loading = false;
+        //this.alertService.showMessage(error.error.message);
+        this.alertService.showMessage(error.error.message, 'danger');
       }
     );
   };
