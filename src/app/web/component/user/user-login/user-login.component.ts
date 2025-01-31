@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserLogInRequestModel } from '../../../../models/auth/user-log-in-request-model';
@@ -10,18 +10,30 @@ import { AlertService } from '../../../../services/common-services/alert.service
 @Component({
   selector: 'app-user-login',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css'
 })
 export class UserLoginComponent implements OnDestroy {
+
+  loginForm: FormGroup;
+  loginError: string = ''; // Store error message on login failure
+
   loginData = {
     email: '',
     password: '',
     rememberMe: false
   };
   userLoginModel: UserLogInRequestModel;
-  constructor(private authService: UserAuthService, private alertService: AlertService) {
+  constructor(private fb: FormBuilder, private authService: UserAuthService, private alertService: AlertService) {
+    // Initialize form with validation
+    this.loginForm = this.fb.group({
+      //email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: [false], // Optional
+    });
+
     this.userLoginModel = {
       username: '',
       password: ''
@@ -32,14 +44,26 @@ export class UserLoginComponent implements OnDestroy {
   loading: boolean = true; // Loader flag
   errorMessage: string | null = null; // Error message if API fails
 
+  // // Convenience getter for form controls
+  // get f() {
+  //   return this.loginForm.controls;
+  // }
+  // Convenience getter for form controls (use bracket notation)
+  get f() {
+    return this.loginForm.controls as { [key: string]: any }; // ✅ Fix TypeScript error
+  }
+
   onSubmit() {
-    this.userLoginModel.username = this.loginData.email;
-    this.userLoginModel.password = this.loginData.password;
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.userLoginModel.username = this.loginForm.value.email;
+    this.userLoginModel.password = this.loginForm.value.password;
     console.log(this.userLoginModel);
 
     this.authService.userLogin(this.userLoginModel).subscribe(
       (data) => {
-        //this.alertService.showMessage('Login Successful 🎉');
         this.alertService.showMessage('Login Successful 🎉', 'success');
         console.log(data);
         this.authResponse = data; // Bind fetched details
@@ -47,10 +71,7 @@ export class UserLoginComponent implements OnDestroy {
       },
       (error) => {
         this.errorMessage = 'Failed to login.';
-        //console.error(error);
-        //console.error(error.error.message);
         this.loading = false;
-        //this.alertService.showMessage(error.error.message);
         this.alertService.showMessage(error.error.message, 'danger');
       }
     );
